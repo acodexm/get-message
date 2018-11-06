@@ -1,0 +1,37 @@
+{
+  "name": "get-message",
+  "version": "1.0.0",
+  "description": "Small lib as a replacement for react-intl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acodexm/get-message.git"
+  },
+  "keywords": [
+    "react-intl",
+    "messages",
+    "function",
+    "javascript",
+    "reactjs",
+    "npm",
+    "node",
+    "util"
+  ],
+  "author": "Acodexm <adamkx7x@gmail.com> (https://github.com/acodexm)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acodexm/get-message/issues"
+  },
+  "homepage": "https://github.com/acodexm/get-message#readme",
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "jest": "^23.6.0"
+  }
+}
