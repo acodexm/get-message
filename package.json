@@ -2,8 +2,10 @@
   "name": "get-message",
   "version": "1.0.0",
   "description": "Small lib as a replacement for react-intl",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module":"src/index.js",
   "scripts": {
+    "build": "babel src --out-dir dist",
     "test": "jest -o"
   },
   "repository": {
@@ -27,6 +29,7 @@
   },
   "homepage": "https://github.com/acodexm/get-message#readme",
   "dependencies": {
+    "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
