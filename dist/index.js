@@ -5,30 +5,77 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports.default = exports.MessageProvider = void 0;
 
-var rex = function rex(str) {
-  return new RegExp('{'.concat(str, '}'), 'g');
-};
+var _utils = require('./utils');
+
+var _format = require('./format');
 
 var MessageProvider = (function() {
   var instance;
-  var messages = {};
+  var defaultProps = {
+    formats: {},
+    messages: {},
+    timeZone: null,
+    defaultLocale: 'en',
+    defaultFormats: {},
+    onError: _utils.defaultErrorHandler
+  };
+  var config = (0, _utils.filterProps)(defaultProps, _utils.intlConfigPropNames);
 
   var createInstance = function createInstance() {
-    return function(prefix) {
-      return function(id) {
-        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var result = messages[''.concat(prefix ? prefix + '.' : '').concat(id)];
-        Object.keys(options).forEach(function(key) {
-          result = result.replace(rex(key), options[key]);
-        });
-        return result || id;
+    return function(prefix, type) {
+      var getMessage = function getMessage(fun) {
+        return function(id, values) {
+          return fun(config)(
+            {
+              id: ''.concat(prefix ? ''.concat(prefix, '.') : '').concat(id),
+              defaultMessage: id
+            },
+            values
+          );
+        };
       };
+
+      var getFormatted = function getFormatted(fun) {
+        return function(value, options) {
+          return fun(config)(value, options);
+        };
+      };
+
+      switch (type) {
+        case 'data': {
+          return getFormatted(_format.formatDate);
+        }
+
+        case 'time': {
+          return getFormatted(_format.formatTime);
+        }
+
+        case 'number': {
+          return getFormatted(_format.formatNumber);
+        }
+
+        case 'pural': {
+          return getFormatted(_format.formatPlural);
+        }
+
+        case 'relative': {
+          return getFormatted(_format.formatRelative);
+        }
+
+        case 'html': {
+          return getMessage(_format.formatHTMLMessage);
+        }
+
+        default: {
+          return getMessage(_format.formatMessage);
+        }
+      }
     };
   };
 
   return {
-    initialize: function initialize(data) {
-      if (data) messages = data;
+    initialize: function initialize(props) {
+      if (props) config = (0, _utils.filterProps)(props, _utils.intlConfigPropNames);
 
       if (!instance) {
         instance = createInstance();

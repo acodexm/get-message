@@ -11,11 +11,8 @@ export const intlConfigPropTypes = {
   timeZone: string,
   formats: object,
   messages: object,
-  textComponent: any,
-
   defaultLocale: string,
   defaultFormats: object,
-
   onError: func
 };
 
