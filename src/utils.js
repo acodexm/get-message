@@ -1,3 +1,7 @@
+import { intlConfigPropTypes } from './types';
+
+export const intlConfigPropNames = Object.keys(intlConfigPropTypes);
+
 const ESCAPED_CHARS = {
   '&': '&amp;',
   '>': '&gt;',
@@ -8,28 +12,27 @@ const ESCAPED_CHARS = {
 
 const UNSAFE_CHARS_REGEX = /[&><"']/g;
 
-export const extend = (obj, ...rest) => {
-  Array.prototype.slice.call(rest, 1).forEach((source) => {
-    Object.keys(source).forEach((key) => {
-      obj[key] = source[key];
-    });
-  });
-  return obj;
-};
 export const escape = (str) => {
   return ('' + str).replace(UNSAFE_CHARS_REGEX, (match) => ESCAPED_CHARS[match]);
 };
 
-export const assertIsDate = (date, errMsg) => {
-  // Determine if the `date` is valid by checking if it is finite, which
-  // is the same way that `Intl.DateTimeFormat#format()` checks.
-  if (!isFinite(date)) {
-    throw new TypeError(errMsg);
-  }
+export const filterProps = (props, whitelist) => {
+  return whitelist.reduce((filtered, name) => {
+    if (props.hasOwnProperty(name)) {
+      filtered[name] = props[name];
+    }
+
+    return filtered;
+  }, {});
 };
 
-export const assertIsNumber = (num, errMsg) => {
-  if (typeof num !== 'number') {
-    throw new TypeError(errMsg);
+export const createError = (message, exception) => {
+  const eMsg = exception ? `\n${exception}` : '';
+  return `[React Intl] ${message}${eMsg}`;
+};
+
+export const defaultErrorHandler = (error) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(error);
   }
 };

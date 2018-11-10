@@ -3,7 +3,7 @@ import messages from './messages';
 
 const getMessage = index('test');
 describe('test all', () => {
-  beforeAll(() => MessageProvider.initialize(messages['en_EN']));
+  beforeAll(() => MessageProvider.initialize({ locale: 'en_EN', messages: messages['en_EN'] }));
   test('get normal translation', () => {
     expect(getMessage('default')).toBe('normal translation');
   });
@@ -13,7 +13,7 @@ describe('test all', () => {
       `first variable STRING second 1234 third ${date} end of translation`
     );
     //change language in this point
-    MessageProvider.initialize(messages['en']);
+    MessageProvider.initialize({ locale: 'en', messages: messages['en'] });
   });
 
   test('get normal translation CAPITALIZED', () => {

@@ -1,19 +1,61 @@
-const rex = (str) => new RegExp(`{${str}}`, 'g');
+import { defaultErrorHandler, filterProps, intlConfigPropNames } from './utils';
+import {
+  formatDate,
+  formatHTMLMessage,
+  formatMessage,
+  formatNumber,
+  formatPlural,
+  formatRelative,
+  formatTime
+} from './format';
 
 export const MessageProvider = (() => {
   let instance;
-  let messages = {};
-  const createInstance = () => (prefix) => (id, options = {}) => {
-    let result = messages[`${prefix ? `${prefix}.` : ''}${id}`];
-    Object.keys(options).forEach((key) => {
-      result = result.replace(rex(key), options[key]);
-    });
-    return result || id;
+  const defaultProps = {
+    formats: {},
+    messages: {},
+    timeZone: null,
+    defaultLocale: 'en',
+    defaultFormats: {},
+    onError: defaultErrorHandler
+  };
+
+  let config = filterProps(defaultProps, intlConfigPropNames);
+
+  const createInstance = () => (prefix, type) => {
+    const getMessage = (fun) => (id, values) =>
+      fun(config)({ id: `${prefix ? `${prefix}.` : ''}${id}`, defaultMessage: id }, values);
+
+    const getFormatted = (fun) => (value, options) => fun(config)(value, options);
+
+    switch (type) {
+      case 'data': {
+        return getFormatted(formatDate);
+      }
+      case 'time': {
+        return getFormatted(formatTime);
+      }
+      case 'number': {
+        return getFormatted(formatNumber);
+      }
+      case 'pural': {
+        return getFormatted(formatPlural);
+      }
+      case 'relative': {
+        return getFormatted(formatRelative);
+      }
+      case 'html': {
+        return getMessage(formatHTMLMessage);
+      }
+      default: {
+        return getMessage(formatMessage);
+      }
+    }
   };
 
   return {
-    initialize: (data) => {
-      if (data) messages = data;
+    initialize: (props) => {
+      if (props) config = filterProps(props, intlConfigPropNames);
       if (!instance) {
         instance = createInstance();
       }
