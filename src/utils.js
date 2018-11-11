@@ -16,10 +16,12 @@ export const escape = (str) => {
   return ('' + str).replace(UNSAFE_CHARS_REGEX, (match) => ESCAPED_CHARS[match]);
 };
 
-export const filterProps = (props, whitelist) => {
+export const filterProps = (props, whitelist, defaults = {}) => {
   return whitelist.reduce((filtered, name) => {
     if (props.hasOwnProperty(name)) {
       filtered[name] = props[name];
+    } else if (defaults.hasOwnProperty(name)) {
+      filtered[name] = defaults[name];
     }
 
     return filtered;
