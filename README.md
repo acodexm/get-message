@@ -83,14 +83,14 @@ if messages, lang or any other config has changed MessageProvider will be update
 
 now somewhere inside <YourApp/>
 
-```
-import getMessage from 'get-message'
+```js
+import getMessage from 'get-message';
 ```
 
 and use it like
 
-```
-<Input placeholder={getMessage(prefix,type)(id,options)}/>
+```js
+<Input placeholder={getMessage(prefix, type)(id, options)} />
 ```
 
 `type` is one of:
@@ -102,16 +102,16 @@ options: variables, formats etc like in react-intl
 
 example:
 
-```
-const getMsg=getMessage('prefix')
+```js
+const getMsg = getMessage('prefix');
 
-const Inputs=({id1,id2,id3})=>(
-    <div>
-        <Input placeholder={getMsg(id1)}/>
-        <Input placeholder={getMsg(id2)}/>
-        <Input placeholder={getMsg(id3)}/>
-    </div>
-)
+const Inputs = ({ id1, id2, id3 }) => (
+  <div>
+    <Input placeholder={getMsg(id1)} />
+    <Input placeholder={getMsg(id2)} />
+    <Input placeholder={getMsg(id3)} />
+  </div>
+);
 ```
 
 ## More info
