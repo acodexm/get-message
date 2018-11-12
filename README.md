@@ -2,7 +2,7 @@
 
 Small lib as a helper or replacement for react-intl
 
-Internationalize [React][] apps. This library provides React components and an API to format dates, numbers, and strings, including pluralization and handling translations.
+This library provides API to format dates, numbers, and strings, including pluralization and handling translations.
 
 [![npm Version][npm-badge]][npm]
 [![Build Status][travis-badge]][travis]
@@ -123,6 +123,14 @@ get-messages is just one of many packages that make up the [FormatJS suite of pa
 - [ ] more details specification
 - [x] more features and use cases
 
+##Contribute
+feel free to improve this lib :)
+
+##License
+
+This software is free to use. GNU license.
+See the [LICENSE file][] for license text and copyright information.
+
 [npm]: https://www.npmjs.org/package/get-message
 [npm-badge]: https://img.shields.io/npm/v/get-message.svg?style=flat-square
 [coverage-badge-green]: badge-functions.svg
@@ -130,7 +138,6 @@ get-messages is just one of many packages that make up the [FormatJS suite of pa
 [david-badge]: https://img.shields.io/david/acodexm/get-message.svg?style=flat-square
 [travis]: https://travis-ci.org/acodexm/get-message
 [travis-badge]: https://img.shields.io/travis/acodexm/get-message/master.svg?style=flat-square
-[react]: http://facebook.github.io/react/
 [formatjs]: http://formatjs.io/
 [formatjs github]: http://formatjs.io/github/
 [documentation]: https://github.com/yahoo/react-intl/wiki
