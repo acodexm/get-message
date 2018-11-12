@@ -144,4 +144,4 @@ See the [LICENSE file][] for license text and copyright information.
 [documentation]: https://github.com/yahoo/react-intl/wiki
 [getting started]: https://github.com/yahoo/react-intl/wiki#getting-started
 [contributing]: https://github.com/acodexm/get-message/blob/master/CONTRIBUTING.md
-[license file]: https://github.com/acodexm/get-message/blob/master/LICENSE.md
+[license file]: https://github.com/acodexm/get-message/blob/master/LICENSE
