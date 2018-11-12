@@ -109,7 +109,7 @@ get-messages is just one of many packages that make up the [FormatJS suite of pa
 
 [npm]: https://www.npmjs.org/package/get-message
 [npm-badge]: https://img.shields.io/npm/v/get-message.svg?style=flat-square
-[coverage-badge-green]: ./coverage/badge-functions.svg
+[coverage-badge-green]: badge-functions.svg
 [david]: https://david-dm.org/acodexm/get-message
 [david-badge]: https://img.shields.io/david/acodexm/get-message.svg?style=flat-square
 [travis]: https://travis-ci.org/acodexm/get-message
