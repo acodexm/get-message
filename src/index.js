@@ -29,7 +29,7 @@ export const MessageProvider = (() => {
     const getFormatted = (fun) => (value, options) => fun(config)(value, options);
 
     switch (type) {
-      case 'data': {
+      case 'date': {
         return getFormatted(formatDate);
       }
       case 'time': {
@@ -38,7 +38,7 @@ export const MessageProvider = (() => {
       case 'number': {
         return getFormatted(formatNumber);
       }
-      case 'pural': {
+      case 'plural': {
         return getFormatted(formatPlural);
       }
       case 'relative': {

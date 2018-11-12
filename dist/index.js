@@ -42,7 +42,7 @@ var MessageProvider = (function() {
       };
 
       switch (type) {
-        case 'data': {
+        case 'date': {
           return getFormatted(_format.formatDate);
         }
 
@@ -54,7 +54,7 @@ var MessageProvider = (function() {
           return getFormatted(_format.formatNumber);
         }
 
-        case 'pural': {
+        case 'plural': {
           return getFormatted(_format.formatPlural);
         }
 

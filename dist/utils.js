@@ -27,9 +27,12 @@ var escape = function escape(str) {
 exports.escape = escape;
 
 var filterProps = function filterProps(props, whitelist) {
+  var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   return whitelist.reduce(function(filtered, name) {
     if (props.hasOwnProperty(name)) {
       filtered[name] = props[name];
+    } else if (defaults.hasOwnProperty(name)) {
+      filtered[name] = defaults[name];
     }
 
     return filtered;
