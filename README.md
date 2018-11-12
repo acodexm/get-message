@@ -6,6 +6,7 @@ Internationalize [React][] apps. This library provides React components and an A
 
 [![npm Version][npm-badge]][npm]
 [![Build Status][travis-badge]][travis]
+![Coverage functions][coverage-badge-green]
 [![Dependency Status][david-badge]][david]
 
 ## Description
@@ -13,6 +14,21 @@ Internationalize [React][] apps. This library provides React components and an A
 This small library provides a simpler way of using international translations in your app.
 
 By using it you can inject your translation anywhere by passing function
+
+### Features
+
+- Display numbers with separators.
+- Display dates and times correctly.
+- Display dates relative to "now".
+- Pluralize labels in strings.
+- Support for 150+ languages.
+- Runs in the browser and Node.js.
+- Built on standards.
+
+### [Documentation][]
+
+get-message is based on React Intl, so all functionality should remain the same.
+React Intl's docs are in this GitHub repo's [Wiki][documentation], [**Get Started**][getting started]. There are also several [runnable example apps][examples] which you can reference to learn how all the pieces fit together.
 
 ## Use cases
 
@@ -82,6 +98,10 @@ const Inputs=({id1,id2,id3})=>(
 )
 ```
 
+## More info
+
+get-messages is just one of many packages that make up the [FormatJS suite of packages][formatjs github], and you can contribute to any/all of them, including the [Format JS website][formatjs] itself.
+
 ## Todo
 
 - [ ] more details specification
@@ -89,6 +109,7 @@ const Inputs=({id1,id2,id3})=>(
 
 [npm]: https://www.npmjs.org/package/get-message
 [npm-badge]: https://img.shields.io/npm/v/get-message.svg?style=flat-square
+[coverage-badge-green]: ./coverage/badge-functions.svg
 [david]: https://david-dm.org/acodexm/get-message
 [david-badge]: https://img.shields.io/david/acodexm/get-message.svg?style=flat-square
 [travis]: https://travis-ci.org/acodexm/get-message
@@ -96,6 +117,7 @@ const Inputs=({id1,id2,id3})=>(
 [react]: http://facebook.github.io/react/
 [formatjs]: http://formatjs.io/
 [formatjs github]: http://formatjs.io/github/
-[documentation]: https://github.com/acodexm/get-message/wiki
+[documentation]: https://github.com/yahoo/react-intl/wiki
+[getting started]: https://github.com/yahoo/react-intl/wiki#getting-started
 [contributing]: https://github.com/acodexm/get-message/blob/master/CONTRIBUTING.md
 [license file]: https://github.com/acodexm/get-message/blob/master/LICENSE.md

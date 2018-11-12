@@ -6,7 +6,9 @@
   "module": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "jest -o"
+    "test": "jest",
+    "test:coverage": "npm test -- --coverage",
+    "test:badges": "npm run test:coverage  && jest-coverage-badges"
   },
   "repository": {
     "type": "git",
@@ -49,6 +51,7 @@
     "intl-relativeformat": "^2.1.0",
     "invariant": "^2.2.4",
     "jest": "^23.6.0",
+    "jest-coverage-badges": "^1.0.0",
     "prettier": "^1.15.1",
     "pretty-quick": "^1.8.0",
     "prop-types": "^15.6.2"

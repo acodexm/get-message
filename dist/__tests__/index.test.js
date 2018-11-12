@@ -6,12 +6,22 @@ var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWild
 
 var _index = _interopRequireWildcard(require('../index'));
 
-var _messages = _interopRequireDefault(require('./messages'));
-
 var _intlRelativeformat = _interopRequireDefault(require('intl-relativeformat'));
 
 var _plural = _interopRequireDefault(require('../plural'));
 
+var messages = {
+  en_EN: {
+    'test.default': 'normal translation',
+    'test.variables': 'first variable {var1} second {var2} third {var3} end of translation',
+    'test.html': '<div>first variable {var1} second {var2} third {var3} end of translation</div>'
+  },
+  en: {
+    'test.default': 'NORMAL TRANSLATION',
+    'test.variables': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION',
+    'test.html': '<div>FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION</div>'
+  }
+};
 var getMessage = (0, _index.default)('test');
 var getDate = (0, _index.default)('test', 'date');
 var getTime = (0, _index.default)('test', 'time');
@@ -22,7 +32,7 @@ describe('test all', function() {
   beforeAll(function() {
     return _index.MessageProvider.initialize({
       locale: 'en_EN',
-      messages: _messages.default['en_EN']
+      messages: messages['en_EN']
     });
   });
   test('get normal translation', function() {
@@ -40,7 +50,7 @@ describe('test all', function() {
 
     _index.MessageProvider.initialize({
       locale: 'en',
-      messages: _messages.default['en']
+      messages: messages['en']
     });
   });
   test('get normal translation CAPITALIZED', function() {
