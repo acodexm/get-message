@@ -123,10 +123,11 @@ get-messages is just one of many packages that make up the [FormatJS suite of pa
 - [ ] more details specification
 - [x] more features and use cases
 
-##Contribute
+## Contribute
+
 feel free to improve this lib :)
 
-##License
+## License
 
 This software is free to use. GNU license.
 See the [LICENSE file][] for license text and copyright information.
