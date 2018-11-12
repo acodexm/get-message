@@ -15,6 +15,14 @@ This small library provides a simpler way of using international translations in
 
 By using it you can inject your translation anywhere by passing function
 
+### Installation
+
+```npm
+npm install get-message --save
+or
+yarn add get-message
+```
+
 ### Features
 
 - Display numbers with separators.
@@ -32,10 +40,10 @@ React Intl's docs are in this GitHub repo's [Wiki][documentation], [**Get Starte
 
 ## Use cases
 
-Have you ever had a problem with passing <FormatMessage/> or intl.formattedMessage()
+Have you ever had a problem with passing `<FormatMessage/>` or `intl.formattedMessage()`
 to input placeholder or any other component which don't allow Components or JSX?
 
-Tired of injectIntl wrapper? or constantly passing message id and defaultMessage everywhere?
+Tired of `injectIntl` wrapper? or constantly passing message id and defaultMessage everywhere?
 
 ## Usage
 
@@ -51,25 +59,33 @@ config props ={
 }
 ```
 
-Call
+Call anywhere in your App:
 
 ```
 const config={locale: lang, messages: messages[lang]}
 MessageProvider.initialize(config)
 ```
 
-anywhere in your App,
-if you want to replace react-intl just replace <IntlProvider/>
+or if you want to replace react-intl just remove <IntlProvider/> and initialize MessageProvider
 
-if lang gets messages or lang has changed instance will be updated
+```js
+import { MessageProvider } from 'get-message';
+import messages from './messages';
+const App = ({ lang }) => {
+  MessageProvider.initialize({ locale: lang, messages: messages[lang] });
+  return <YourApp />;
+};
+```
 
-then
+if messages, lang or any other config has changed MessageProvider will be updated
+
+##
+
+now somewhere inside <YourApp/>
 
 ```
 import getMessage from 'get-message'
 ```
-
-anywhere
 
 and use it like
 
@@ -77,17 +93,17 @@ and use it like
 <Input placeholder={getMessage(prefix,type)(id,options)}/>
 ```
 
-type is one of:
+`type` is one of:
 
 - date, time, number, relative, plural => prefix is omitted, id is value
 - html, 'blank' => prefix is not required,
 
 options: variables, formats etc like in react-intl
 
-or
+example:
 
 ```
-const getMsg=getMessage('prefix',type)
+const getMsg=getMessage('prefix')
 
 const Inputs=({id1,id2,id3})=>(
     <div>
