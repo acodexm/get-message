@@ -8,7 +8,7 @@ const messages = {
     'test.variables': 'first variable {var1} second {var2} third {var3} end of translation',
     'test.html': '<div>first variable {var1} second {var2} third {var3} end of translation</div>'
   },
-  en: {
+  pl: {
     'test.default': 'NORMAL TRANSLATION',
     'test.variables': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION',
     'test.html': '<div>FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION</div>'
@@ -35,7 +35,7 @@ describe('test all', () => {
       `first variable STRING second 1234 third ${date} end of translation`
     );
     //change language in this point
-    MessageProvider.initialize({ locale: 'en', messages: messages['en'] });
+    MessageProvider.initialize({ locale: 'pl', messages: messages['pl'] });
   });
 
   test('get normal translation CAPITALIZED', () => {
@@ -58,14 +58,14 @@ describe('test all', () => {
   });
 
   it('formatDate formats date ms timestamp values', () => {
-    const df = new Intl.DateTimeFormat('en');
+    const df = new Intl.DateTimeFormat('pl');
 
     const timestamp = Date.now();
     expect(getDate(timestamp)).toBe(df.format(timestamp));
   });
 
   it('formatTime formats date ms timestamp values', () => {
-    const df = new Intl.DateTimeFormat('en', {
+    const df = new Intl.DateTimeFormat('pl', {
       hour: 'numeric',
       minute: 'numeric'
     });
@@ -74,21 +74,21 @@ describe('test all', () => {
   });
 
   it('formatRelative formats date ms timestamp values', () => {
-    const rf = new IntlRelativeFormat('en');
+    const rf = new IntlRelativeFormat('pl');
 
     const timestamp = Date.now();
     expect(getRelative(timestamp)).toBe(rf.format(timestamp, { now: timestamp }));
   });
 
   it('formatNumber formats number values', () => {
-    const nf = new Intl.NumberFormat('en');
+    const nf = new Intl.NumberFormat('pl');
 
     expect(getNumber(1000)).toBe(nf.format(1000));
     expect(getNumber(1.1)).toBe(nf.format(1.1));
   });
 
   it('formatPlural formats decimal values', () => {
-    const pf = new IntlPluralFormat('en');
+    const pf = new IntlPluralFormat('pl');
 
     expect(getPlural(0.1)).toBe(pf.format(0.1));
     expect(getPlural(1.0)).toBe(pf.format(1.0));

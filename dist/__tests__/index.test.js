@@ -16,7 +16,7 @@ var messages = {
     'test.variables': 'first variable {var1} second {var2} third {var3} end of translation',
     'test.html': '<div>first variable {var1} second {var2} third {var3} end of translation</div>'
   },
-  en: {
+  pl: {
     'test.default': 'NORMAL TRANSLATION',
     'test.variables': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION',
     'test.html': '<div>FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION</div>'
@@ -49,8 +49,8 @@ describe('test all', function() {
     ).toBe('first variable STRING second 1234 third '.concat(date, ' end of translation')); //change language in this point
 
     _index.MessageProvider.initialize({
-      locale: 'en',
-      messages: messages['en']
+      locale: 'pl',
+      messages: messages['pl']
     });
   });
   test('get normal translation CAPITALIZED', function() {
@@ -83,12 +83,12 @@ describe('test all', function() {
     );
   });
   it('formatDate formats date ms timestamp values', function() {
-    var df = new Intl.DateTimeFormat('en');
+    var df = new Intl.DateTimeFormat('pl');
     var timestamp = Date.now();
     expect(getDate(timestamp)).toBe(df.format(timestamp));
   });
   it('formatTime formats date ms timestamp values', function() {
-    var df = new Intl.DateTimeFormat('en', {
+    var df = new Intl.DateTimeFormat('pl', {
       hour: 'numeric',
       minute: 'numeric'
     });
@@ -96,7 +96,7 @@ describe('test all', function() {
     expect(getTime(timestamp)).toBe(df.format(timestamp));
   });
   it('formatRelative formats date ms timestamp values', function() {
-    var rf = new _intlRelativeformat.default('en');
+    var rf = new _intlRelativeformat.default('pl');
     var timestamp = Date.now();
     expect(getRelative(timestamp)).toBe(
       rf.format(timestamp, {
@@ -105,12 +105,12 @@ describe('test all', function() {
     );
   });
   it('formatNumber formats number values', function() {
-    var nf = new Intl.NumberFormat('en');
+    var nf = new Intl.NumberFormat('pl');
     expect(getNumber(1000)).toBe(nf.format(1000));
     expect(getNumber(1.1)).toBe(nf.format(1.1));
   });
   it('formatPlural formats decimal values', function() {
-    var pf = new _plural.default('en');
+    var pf = new _plural.default('pl');
     expect(getPlural(0.1)).toBe(pf.format(0.1));
     expect(getPlural(1.0)).toBe(pf.format(1.0));
     expect(getPlural(1.1)).toBe(pf.format(1.1));

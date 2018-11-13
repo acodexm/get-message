@@ -55,7 +55,7 @@ export const MessageProvider = (() => {
 
   return {
     initialize: (props) => {
-      if (props) config = filterProps(props, intlConfigPropNames);
+      if (props) config = filterProps(props, intlConfigPropNames, defaultProps);
       if (!instance) {
         instance = createInstance();
       }

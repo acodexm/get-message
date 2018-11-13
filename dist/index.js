@@ -75,7 +75,7 @@ var MessageProvider = (function() {
 
   return {
     initialize: function initialize(props) {
-      if (props) config = (0, _utils.filterProps)(props, _utils.intlConfigPropNames);
+      if (props) config = (0, _utils.filterProps)(props, _utils.intlConfigPropNames, defaultProps);
 
       if (!instance) {
         instance = createInstance();
