@@ -10,7 +10,6 @@ export const intlConfigPropTypes = {
   locale: string,
   timeZone: string,
   formats: object,
-  jsx: bool,
   textComponent: any,
   messages: object,
   defaultLocale: string,

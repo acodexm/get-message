@@ -18,7 +18,6 @@ export const MessageProvider = (() => {
     messages: {},
     timeZone: null,
     textComponent: 'span',
-    jsx: false,
     defaultLocale: 'en',
     defaultFormats: {},
     onError: defaultErrorHandler
