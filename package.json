@@ -54,7 +54,8 @@
     "jest-coverage-badges": "^1.0.0",
     "prettier": "^1.15.1",
     "pretty-quick": "^1.8.0",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3"
   },
   "prettier": {
     "printWidth": 120,

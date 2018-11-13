@@ -1,3 +1,4 @@
+import React from 'react';
 import { defaultErrorHandler, filterProps, intlConfigPropNames } from './utils';
 import {
   formatDate,
@@ -46,6 +47,10 @@ export const MessageProvider = (() => {
       }
       case 'html': {
         return getMessage(formatHTMLMessage);
+      }
+      case 'react': {
+        // todo textComponent in config
+        return <span dangerouslySetInnerHTML={{ __html: getMessage(formatMessage) }} />;
       }
       default: {
         return getMessage(formatMessage);
