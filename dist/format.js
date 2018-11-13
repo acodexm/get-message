@@ -1,15 +1,21 @@
 'use strict';
 
+var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWildcard');
+
 var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports.formatHTMLMessage = exports.formatMessage = exports.formatPlural = exports.formatNumber = exports.formatRelative = exports.formatTime = exports.formatDate = void 0;
+exports.formatReact = exports.formatHTMLMessage = exports.formatMessage = exports.formatPlural = exports.formatNumber = exports.formatRelative = exports.formatTime = exports.formatDate = void 0;
+
+var _toConsumableArray2 = _interopRequireDefault(require('@babel/runtime/helpers/toConsumableArray'));
 
 var _objectSpread2 = _interopRequireDefault(require('@babel/runtime/helpers/objectSpread'));
 
 var _intlRelativeformat = _interopRequireDefault(require('intl-relativeformat'));
+
+var _react = _interopRequireWildcard(require('react'));
 
 var _invariant = _interopRequireDefault(require('invariant'));
 
@@ -301,3 +307,76 @@ var formatHTMLMessage = function formatHTMLMessage(config) {
 };
 
 exports.formatHTMLMessage = formatHTMLMessage;
+
+var formatReact = function formatReact(config) {
+  return function(messageDescriptor) {
+    var values = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var _config$textComponent = config.textComponent,
+      Component = _config$textComponent === void 0 ? 'span' : _config$textComponent;
+    var tokenDelimiter;
+    var tokenizedValues;
+    var elements;
+    var hasValues = values && Object.keys(values).length > 0;
+
+    if (hasValues) {
+      // Creates a token with a random UID that should not be guessable or
+      // conflict with other parts of the `message` string.
+      var uid = Math.floor(Math.random() * 0x10000000000).toString(16);
+
+      var generateToken = (function() {
+        var counter = 0;
+        return function() {
+          return 'ELEMENT-'.concat(uid, '-').concat((counter += 1));
+        };
+      })(); // Splitting with a delimiter to support IE8. When using a regex
+      // with a capture group IE8 does not include the capture group in
+      // the resulting array.
+
+      tokenDelimiter = '@__'.concat(uid, '__@');
+      tokenizedValues = {};
+      elements = {}; // Iterates over the `props` to keep track of any React Element
+      // values so they can be represented by the `token` as a placeholder
+      // when the `message` is formatted. This allows the formatted
+      // message to then be broken-up into parts with references to the
+      // React Elements inserted back in.
+
+      Object.keys(values).forEach(function(name) {
+        var value = values[name];
+
+        if ((0, _react.isValidElement)(value)) {
+          var token = generateToken();
+          tokenizedValues[name] = tokenDelimiter + token + tokenDelimiter;
+          elements[token] = value;
+        } else {
+          tokenizedValues[name] = value;
+        }
+      });
+    }
+
+    var formattedMessage = formatMessage(config)(messageDescriptor, tokenizedValues || values);
+    var nodes;
+    var hasElements = elements && Object.keys(elements).length > 0;
+
+    if (hasElements) {
+      // Split the message into parts so the React Element values captured
+      // above can be inserted back into the rendered message. This
+      // approach allows messages to render with React Elements while
+      // keeping React's virtual diffing working properly.
+      nodes = formattedMessage
+        .split(tokenDelimiter)
+        .filter(function(part) {
+          return !!part;
+        })
+        .map(function(part) {
+          return elements[part] || part;
+        });
+    } else {
+      nodes = [formattedMessage];
+    } // Needs to use `createElement()` instead of JSX, otherwise React will
+    // warn about a missing `key` prop with rich-text message formatting.
+
+    return _react.createElement.apply(void 0, [Component, null].concat((0, _toConsumableArray2.default)(nodes)));
+  };
+};
+
+exports.formatReact = formatReact;

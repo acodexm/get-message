@@ -1,8 +1,10 @@
 'use strict';
 
+var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWildcard');
+
 var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
 
-var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWildcard');
+var _react = _interopRequireDefault(require('react'));
 
 var _index = _interopRequireWildcard(require('../index'));
 
@@ -11,28 +13,30 @@ var _intlRelativeformat = _interopRequireDefault(require('intl-relativeformat'))
 var _plural = _interopRequireDefault(require('../plural'));
 
 var messages = {
-  en_EN: {
+  en: {
     'test.default': 'normal translation',
     'test.variables': 'first variable {var1} second {var2} third {var3} end of translation',
-    'test.html': '<div>first variable {var1} second {var2} third {var3} end of translation</div>'
+    'test.html': 'first variable {var1} second {var2} third {var3} end of translation'
   },
   pl: {
     'test.default': 'NORMAL TRANSLATION',
     'test.variables': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION',
-    'test.html': '<div>FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION</div>'
+    'test.html': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION'
   }
 };
 var getMessage = (0, _index.default)('test');
+var getReact = (0, _index.default)('test', 'react');
 var getDate = (0, _index.default)('test', 'date');
 var getTime = (0, _index.default)('test', 'time');
 var getNumber = (0, _index.default)('test', 'number');
 var getPlural = (0, _index.default)('test', 'plural');
 var getRelative = (0, _index.default)('test', 'relative');
+var getHtml = (0, _index.default)('test', 'html');
 describe('test all', function() {
   beforeAll(function() {
     return _index.MessageProvider.initialize({
-      locale: 'en_EN',
-      messages: messages['en_EN']
+      locale: 'en',
+      messages: messages['en']
     });
   });
   test('get normal translation', function() {
@@ -68,7 +72,6 @@ describe('test all', function() {
   });
   test('get HTML translation with variables CAPITALIZED', function() {
     var date = new Date();
-    var getHtml = (0, _index.default)('test', 'html');
     expect(
       getHtml('html', {
         var1: '<strong>bold text</strong>',
@@ -76,10 +79,7 @@ describe('test all', function() {
         var3: date
       })
     ).toBe(
-      '<div>FIRST VARIABLE &lt;strong&gt;bold text&lt;/strong&gt; SECOND 1234 THIRD '.concat(
-        date,
-        ' END OF TRANSLATION</div>'
-      )
+      'FIRST VARIABLE &lt;strong&gt;bold text&lt;/strong&gt; SECOND 1234 THIRD '.concat(date, ' END OF TRANSLATION')
     );
   });
   it('formatDate formats date ms timestamp values', function() {
@@ -114,5 +114,27 @@ describe('test all', function() {
     expect(getPlural(0.1)).toBe(pf.format(0.1));
     expect(getPlural(1.0)).toBe(pf.format(1.0));
     expect(getPlural(1.1)).toBe(pf.format(1.1));
+  });
+  test('get REACT translation with variables CAPITALIZED', function() {
+    _index.MessageProvider.initialize({
+      locale: 'en',
+      messages: messages['en']
+    });
+
+    expect(
+      getReact('html', {
+        var1: _react.default.createElement('strong', null, 'bold text'),
+        var2: 1234,
+        var3: 'date'
+      })
+    ).toEqual(
+      _react.default.createElement(
+        'span',
+        null,
+        'first variable ',
+        _react.default.createElement('strong', null, 'bold text'),
+        ' second 1234 third date end of translation'
+      )
+    );
   });
 });

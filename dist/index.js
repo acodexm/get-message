@@ -1,9 +1,13 @@
 'use strict';
 
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.default = exports.MessageProvider = void 0;
+
+var _react = _interopRequireDefault(require('react'));
 
 var _utils = require('./utils');
 
@@ -15,6 +19,8 @@ var MessageProvider = (function() {
     formats: {},
     messages: {},
     timeZone: null,
+    textComponent: 'span',
+    jsx: false,
     defaultLocale: 'en',
     defaultFormats: {},
     onError: _utils.defaultErrorHandler
@@ -64,6 +70,10 @@ var MessageProvider = (function() {
 
         case 'html': {
           return getMessage(_format.formatHTMLMessage);
+        }
+
+        case 'react': {
+          return getMessage(_format.formatReact);
         }
 
         default: {

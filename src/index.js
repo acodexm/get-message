@@ -6,6 +6,7 @@ import {
   formatMessage,
   formatNumber,
   formatPlural,
+  formatReact,
   formatRelative,
   formatTime
 } from './format';
@@ -16,6 +17,8 @@ export const MessageProvider = (() => {
     formats: {},
     messages: {},
     timeZone: null,
+    textComponent: 'span',
+    jsx: false,
     defaultLocale: 'en',
     defaultFormats: {},
     onError: defaultErrorHandler
@@ -49,8 +52,7 @@ export const MessageProvider = (() => {
         return getMessage(formatHTMLMessage);
       }
       case 'react': {
-        // todo textComponent in config
-        return <span dangerouslySetInnerHTML={{ __html: getMessage(formatMessage) }} />;
+        return getMessage(formatReact);
       }
       default: {
         return getMessage(formatMessage);

@@ -1,29 +1,32 @@
+import React from 'react';
 import index, { MessageProvider } from '../index';
 import IntlRelativeFormat from 'intl-relativeformat';
 import IntlPluralFormat from '../plural';
 
 const messages = {
-  en_EN: {
+  en: {
     'test.default': 'normal translation',
     'test.variables': 'first variable {var1} second {var2} third {var3} end of translation',
-    'test.html': '<div>first variable {var1} second {var2} third {var3} end of translation</div>'
+    'test.html': 'first variable {var1} second {var2} third {var3} end of translation'
   },
   pl: {
     'test.default': 'NORMAL TRANSLATION',
     'test.variables': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION',
-    'test.html': '<div>FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION</div>'
+    'test.html': 'FIRST VARIABLE {var1} SECOND {var2} THIRD {var3} END OF TRANSLATION'
   }
 };
 
 const getMessage = index('test');
+const getReact = index('test', 'react');
 const getDate = index('test', 'date');
 const getTime = index('test', 'time');
 const getNumber = index('test', 'number');
 const getPlural = index('test', 'plural');
 const getRelative = index('test', 'relative');
+const getHtml = index('test', 'html');
 
 describe('test all', () => {
-  beforeAll(() => MessageProvider.initialize({ locale: 'en_EN', messages: messages['en_EN'] }));
+  beforeAll(() => MessageProvider.initialize({ locale: 'en', messages: messages['en'] }));
 
   test('get normal translation', () => {
     expect(getMessage('default')).toBe('normal translation');
@@ -51,9 +54,8 @@ describe('test all', () => {
 
   test('get HTML translation with variables CAPITALIZED', () => {
     const date = new Date();
-    const getHtml = index('test', 'html');
     expect(getHtml('html', { var1: '<strong>bold text</strong>', var2: 1234, var3: date })).toBe(
-      `<div>FIRST VARIABLE &lt;strong&gt;bold text&lt;/strong&gt; SECOND 1234 THIRD ${date} END OF TRANSLATION</div>`
+      `FIRST VARIABLE &lt;strong&gt;bold text&lt;/strong&gt; SECOND 1234 THIRD ${date} END OF TRANSLATION`
     );
   });
 
@@ -93,5 +95,14 @@ describe('test all', () => {
     expect(getPlural(0.1)).toBe(pf.format(0.1));
     expect(getPlural(1.0)).toBe(pf.format(1.0));
     expect(getPlural(1.1)).toBe(pf.format(1.1));
+  });
+
+  test('get REACT translation with variables CAPITALIZED', () => {
+    MessageProvider.initialize({ locale: 'en', messages: messages['en'] });
+    expect(getReact('html', { var1: <strong>bold text</strong>, var2: 1234, var3: 'date' })).toEqual(
+      <span>
+        first variable <strong>bold text</strong> second 1234 third date end of translation
+      </span>
+    );
   });
 });
