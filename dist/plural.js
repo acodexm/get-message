@@ -11,6 +11,11 @@ var _classCallCheck2 = _interopRequireDefault(require('@babel/runtime/helpers/cl
 
 var _intlMessageformat = _interopRequireDefault(require('intl-messageformat'));
 
+/*
+ * Copyright 2015, Yahoo Inc.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ */
 // This is a "hack" until a proper `intl-pluralformat` package is created.
 var resolveLocale = function resolveLocale(locales) {
   // IntlMessageFormat#_resolveLocale() does not depend on `this`.

@@ -11,6 +11,11 @@ var _objectSpread2 = _interopRequireDefault(require('@babel/runtime/helpers/obje
 
 var _propTypes = _interopRequireDefault(require('prop-types'));
 
+/*
+ * Copyright 2015, Yahoo Inc.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ */
 var bool = _propTypes.default.bool,
   number = _propTypes.default.number,
   string = _propTypes.default.string,
@@ -28,7 +33,6 @@ var intlConfigPropTypes = {
   locale: string,
   timeZone: string,
   formats: object,
-  jsx: bool,
   textComponent: any,
   messages: object,
   defaultLocale: string,

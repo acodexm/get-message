@@ -20,7 +20,6 @@ var MessageProvider = (function() {
     messages: {},
     timeZone: null,
     textComponent: 'span',
-    jsx: false,
     defaultLocale: 'en',
     defaultFormats: {},
     onError: _utils.defaultErrorHandler

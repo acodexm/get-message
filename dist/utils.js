@@ -7,6 +7,11 @@ exports.defaultErrorHandler = exports.createError = exports.filterProps = export
 
 var _types = require('./types');
 
+/*
+ * Copyright 2015, Yahoo Inc.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ */
 var intlConfigPropNames = Object.keys(_types.intlConfigPropTypes);
 exports.intlConfigPropNames = intlConfigPropNames;
 var ESCAPED_CHARS = {

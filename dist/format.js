@@ -29,6 +29,11 @@ var _intlMessageformat = _interopRequireDefault(require('intl-messageformat'));
 
 var _plural = _interopRequireDefault(require('./plural'));
 
+/*
+ * Copyright 2015, Yahoo Inc.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ */
 var getNumberFormat = (0, _intlFormatCache.default)(Intl.NumberFormat);
 var getDateTimeFormat = (0, _intlFormatCache.default)(Intl.DateTimeFormat);
 var getMessageFormat = (0, _intlFormatCache.default)(_intlMessageformat.default);
