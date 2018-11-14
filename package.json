@@ -3,12 +3,12 @@
   "version": "1.0.9",
   "description": "Small lib as a replacement for react-intl",
   "main": "dist/index.js",
-  "module": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --ignore '**/*.test.js'",
     "test": "jest",
     "test:coverage": "npm test -- --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges"
+    "test:badges": "npm run test:coverage  && jest-coverage-badges",
+    "prettier": "pretty-quick"
   },
   "repository": {
     "type": "git",
