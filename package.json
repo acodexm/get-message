@@ -1,6 +1,6 @@
 {
   "name": "get-message",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Small lib as a replacement for react-intl",
   "main": "dist/index.js",
   "scripts": {
